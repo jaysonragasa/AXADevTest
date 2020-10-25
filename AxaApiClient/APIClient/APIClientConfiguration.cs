@@ -27,5 +27,7 @@
                 return devEnv;
             }
         }
+
+        public static string AxaApiKey => "yourapikey";
     }
 }

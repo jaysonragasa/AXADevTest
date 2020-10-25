@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\AxaApiClient\AxaApiClient.csproj" />
     <ProjectReference Include="..\..\AXADevTest\AXADevTest\AXADevTest.csproj" />
   </ItemGroup>
 

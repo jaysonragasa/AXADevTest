@@ -22,4 +22,8 @@
   <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\AxaApiClient\AxaApiClient.csproj" />
+  </ItemGroup>
 </Project>

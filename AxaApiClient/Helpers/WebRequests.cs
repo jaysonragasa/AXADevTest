@@ -1,4 +1,5 @@
-﻿using AXADevTest.APIClient.DTOModels;
+﻿using AXADevTest.APIClient;
+using AXADevTest.APIClient.DTOModels;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
@@ -28,6 +29,9 @@ namespace AXADevTest.Helpers
                 {
                     if (!string.IsNullOrEmpty(token))
                         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                    if (!string.IsNullOrEmpty(APIClientConfiguration.AxaApiKey))
+                        client.DefaultRequestHeaders.Add("x-axa-api-key", APIClientConfiguration.AxaApiKey);
 
                     HttpResponseMessage respMsg = null;
 
@@ -70,6 +74,10 @@ namespace AXADevTest.Helpers
                                 });
                             }
                         }
+                        catch(Exception ex)
+                        {
+                            Debug.WriteLine("ERROR: " + ex.Message);
+                        }
 
                         Debug.WriteLine($"#{retry} Retrying conection.");
                     }
@@ -90,6 +98,7 @@ namespace AXADevTest.Helpers
                             {
                                 result.Result = resp.StatusCode;
                                 result.Payload = content;
+                                result.Message = dsresp.Message;
                                 // log here why
                                 Debug.WriteLine($"return bad result status={resp.StatusCode}");
                             }
@@ -97,6 +106,7 @@ namespace AXADevTest.Helpers
                             {
                                 result.Result = resp.StatusCode;
                                 result.Payload = content;
+                                result.Message = dsresp.Message;
                             }
                         }
                         else
